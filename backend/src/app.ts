@@ -21,9 +21,11 @@ app.use(express.json());
 connectToMongoDB('GameOverTopList', mongoURL);
 
 //Routes import
-import apiRoutes from './routes/api';
+import itemsRoutes from './routes/itemsRoutes';
+import roomRoutes from './routes/roomRoutes';
 
-app.use('/api', apiRoutes);
+app.use('/api/items', itemsRoutes);
+app.use('/api/rooms', roomRoutes);
 
 app.listen(port, () => {
     console.log(
