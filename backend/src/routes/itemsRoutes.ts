@@ -3,6 +3,7 @@ import { Request, Response, Router } from 'express';
 
 //Local Dependencies Import
 import { createListItem, getItems } from '../listItem';
+import { getRooms } from '../room';
 
 //Variable Declarations
 const router = Router();
@@ -20,6 +21,17 @@ router.get('/', async (req: Request, res: Response) => {
  * @description This route creates a new item
  */
 router.post('/create', async (req: Request, res: Response) => {
+    //Check that roomID is valid
+    const roomID = req.body.room;
+    const room = await getRooms();
+    const roomExists = room.find((room) => room.id === roomID);
+    if (!roomExists) {
+        res.json({
+            error: 'Room does not exist',
+        }).status(400);
+        return;
+    }
+
     await createListItem(req.body.teamName, req.body.room, req.body.minutes, req.body.seconds);
     const items = await getItems();
 
