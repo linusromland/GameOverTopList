@@ -1,0 +1,44 @@
+{
+    "name": "toplist_backend",
+    "version": "0.0.1",
+    "description": "Backend for toplist",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "ts-node ./src/app.ts",
+        "dev": "nodemon",
+        "build": "npx tsc",
+        "prod": "npm run build && forever ./dist/app.js",
+        "lint": "eslint . --fix"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/linusromland/GameOverTopList.git"
+    },
+    "author": "Linus Romland",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/linusromland/GameOverTopList/issues"
+    },
+    "homepage": "https://github.com/linusromland/GameOverTopList#readme",
+    "devDependencies": {
+        "@types/express": "^4.17.13",
+        "@types/ip": "^1.1.0",
+        "@typescript-eslint/eslint-plugin": "^5.12.1",
+        "@typescript-eslint/parser": "^5.12.1",
+        "eslint": "^8.9.0",
+        "eslint-config-prettier": "^8.4.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "nodemon": "^2.0.15",
+        "prettier": "^2.5.1",
+        "typescript": "^4.5.5"
+    },
+    "dependencies": {
+        "dotenv": "^16.0.0",
+        "express": "^4.17.3",
+        "ip": "^1.1.5",
+        "mongoose": "^6.2.4",
+        "ts-node": "^10.5.0",
+        "tsc": "^2.0.4"
+    }
+}
