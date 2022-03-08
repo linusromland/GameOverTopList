@@ -2,7 +2,7 @@
 import { Request, Response, Router } from 'express';
 
 //Local Dependencies Import
-import { createRoom, getRooms, deleteRoom } from '../room';
+import { createRoom, getRooms, deleteRoom, updateRoomName } from '../room';
 import iRoom from '../interfaces/iRoom';
 
 //Variable Declarations
@@ -24,6 +24,16 @@ router.post('/create', async (req: Request, res: Response) => {
     await createRoom(req.body.roomName);
     const rooms = await getRooms();
 
+    res.json(rooms).status(200);
+});
+
+/**
+ * @name patch/updateName
+ * @description This route updates the name of a room
+ */
+router.patch('/updateName', async (req: Request, res: Response) => {
+    await updateRoomName(req.body.id, req.body.roomName);
+    const rooms = await getRooms();
     res.json(rooms).status(200);
 });
 

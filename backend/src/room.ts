@@ -33,6 +33,21 @@ export async function getRooms() {
 }
 
 /**
+ * @name updateRoomName
+ * @param id - The id of the room
+ * @param roomName - The new name of the room
+ * @returns {Boolean} - Returns true if the room was updated
+ * @description This function updates the name of the room
+ */
+export async function updateRoomName(id: string, roomName: string) {
+    if (id && roomName) {
+        return await room.findByIdAndUpdate(new Types.ObjectId(id), { roomName }, { new: true });
+    } else {
+        return false;
+    }
+}
+
+/**
  * @name deleteRoom
  * @param  {string} id - ID of the room to delete
  * @returns {Promise<iListItem>} - Returns all new rooms
