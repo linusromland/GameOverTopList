@@ -9,7 +9,8 @@
         "dev": "nodemon",
         "build": "npx tsc",
         "prod": "npm run build && forever ./dist/app.js",
-        "lint": "eslint . --fix"
+        "lint": "eslint . --fix",
+        "format": "prettier .  --write"
     },
     "repository": {
         "type": "git",

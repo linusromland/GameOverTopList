@@ -1,5 +1,5 @@
 //External Dependencies import
-import { Schema, model, Types } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
 //Local Dependencies Import
 import iListItem from '../interfaces/iListItem';
