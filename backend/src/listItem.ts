@@ -13,12 +13,12 @@ import listItem from './models/listItem';
  */
 export async function createListItem(teamName: string, room: string, clues: number, minutes: number, seconds: number) {
     if (teamName && room && clues && minutes && seconds) {
+        const time = minutes * 60 + seconds;
         const item = new listItem({
             teamName,
             room,
             clues,
-            minutes,
-            seconds,
+            time,
         });
 
         //Saves the board

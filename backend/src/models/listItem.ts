@@ -18,11 +18,7 @@ const ListItemSchema = new Schema({
         type: Number,
         required: true,
     },
-    minutes: {
-        type: Number,
-        required: true,
-    },
-    seconds: {
+    time: {
         type: Number,
         required: true,
     },
