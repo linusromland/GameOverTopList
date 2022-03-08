@@ -11,11 +11,12 @@ import listItem from './models/listItem';
  * @returns {Promise<iListItem>} - Returns the created ListItem
  * @description This function creates a new board
  */
-export async function createListItem(teamName: string, room: string, minutes: number, seconds: number) {
-    if (teamName && room && minutes && seconds) {
+export async function createListItem(teamName: string, room: string, clues: number, minutes: number, seconds: number) {
+    if (teamName && room && clues && minutes && seconds) {
         const item = new listItem({
             teamName,
             room,
+            clues,
             minutes,
             seconds,
         });

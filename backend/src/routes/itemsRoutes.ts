@@ -33,7 +33,7 @@ router.post('/create', async (req: Request, res: Response) => {
         return;
     }
 
-    await createListItem(req.body.teamName, req.body.room, req.body.minutes, req.body.seconds);
+    await createListItem(req.body.teamName, req.body.room, req.body.clues, req.body.minutes, req.body.seconds);
     const items = await getItems();
 
     res.json(items).status(200);
