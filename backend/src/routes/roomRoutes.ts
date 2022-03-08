@@ -44,7 +44,9 @@ router.delete('/delete/:id', async (req: Request, res: Response) => {
     }
 
     //Delete item
-    const updatedRooms = await deleteRoom(roomID);
+    await deleteRoom(roomID);
+
+    const updatedRooms = await getRooms();
 
     res.json(updatedRooms).status(200);
 });

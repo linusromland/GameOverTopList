@@ -56,7 +56,8 @@ router.delete('/delete/:id', async (req: Request, res: Response) => {
     }
 
     //Delete item
-    const items = await deleteListItem(itemID);
+    await deleteListItem(itemID);
+    const items = await getItems();
 
     res.json(items).status(200);
 });
