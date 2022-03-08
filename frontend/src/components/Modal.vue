@@ -57,12 +57,12 @@
 			submitBtnValue: {
 				//Value of submit button
 				type: String,
-				default: 'Submit'
+				default: 'Skapa'
 			},
 			cancelBtnValue: {
 				//Value of cancel button
 				type: String,
-				default: 'Cancel'
+				default: 'Avbryt'
 			},
 			title: {
 				//Title of modal

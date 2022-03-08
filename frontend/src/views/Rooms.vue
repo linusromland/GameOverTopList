@@ -27,7 +27,7 @@
 	<CreateRoomModal @refresh="getRooms" />
 	<div v-for="(room, index) in rooms" :key="index">
 		<h1 class="text-3xl text-cyan-400">{{ room.roomName }}</h1>
-		<button>Edit Room</button>
-		<button>Delete Room</button>
+		<button>Redigera</button>
+		<button>Ta bort</button>
 	</div>
 </template>

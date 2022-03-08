@@ -4,7 +4,7 @@
 		@click="showCreateRoom"
 		class="bg-blue-500 hover:bg-blue-400 text-white p-1 rounded-md m-2 h-12 cursor-pointer"
 	>
-		Create Room
+		Skapa rum
 	</button>
 
 	<!--Create Room Modal -->
@@ -13,15 +13,15 @@
 		@close="createModal = false"
 		@submit="createRoom"
 		:showSubmitBtn="true"
-		submitBtnValue="Create Room"
-		title="Create Room"
+		submitBtnValue="Skapa Rum"
+		title="Skapa Rum"
 		:error="error"
 		:errorMessage="errorMessage"
 	>
 		<input
 			type="text"
 			class="w-5/6 p-2 m-5 rounded-md bg-gray-200 text-black"
-			placeholder="Room Name"
+			placeholder="Rumsnamn"
 			autocomplete="off"
 			maxlength="24"
 			v-model="roomName"
@@ -36,6 +36,7 @@
 		components: {
 			Modal
 		},
+		emits: ['refresh'],
 		data() {
 			return {
 				createModal: false,
@@ -50,8 +51,7 @@
 			},
 			async createRoom() {
 				if (this.roomName.length < 1) {
-					this.error = true;
-					this.errorMessage = 'Room name cannot be empty';
+					this.errorMessage = 'Rumsnamn saknas';
 					return;
 				}
 
@@ -71,6 +71,7 @@
 				});
 				if ((await request.status) === 200) {
 					console.log('Room created successfully');
+					this.roomName = '';
 					this.$emit('refresh');
 				}
 			}
