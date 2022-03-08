@@ -2,7 +2,8 @@
 import { Request, Response, Router } from 'express';
 
 //Local Dependencies Import
-import { createRoom, getRooms } from '../room';
+import { createRoom, getRooms, deleteRoom } from '../room';
+import iRoom from '../interfaces/iRoom';
 
 //Variable Declarations
 const router = Router();
@@ -24,6 +25,28 @@ router.post('/create', async (req: Request, res: Response) => {
     const rooms = await getRooms();
 
     res.json(rooms).status(200);
+});
+
+/**
+ * @name delete/delete/:id
+ * @description This route deletes an room
+ */
+router.delete('/delete/:id', async (req: Request, res: Response) => {
+    //Check that roomID is valid
+    const roomID = req.params.id;
+    const rooms = await getRooms();
+    const roomExists = rooms.find((room: iRoom) => room._id.toString() === roomID);
+    if (!roomExists) {
+        res.json({
+            error: 'Room does not exist',
+        }).status(400);
+        return;
+    }
+
+    //Delete item
+    const updatedRooms = await deleteRoom(roomID);
+
+    res.json(updatedRooms).status(200);
 });
 
 export default router;

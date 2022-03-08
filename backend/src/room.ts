@@ -1,3 +1,6 @@
+//External Dependencies Import
+import { Types } from 'mongoose';
+
 //Local Dependencies Import
 import room from './models/room';
 
@@ -27,4 +30,13 @@ export async function createRoom(roomName: string) {
  */
 export async function getRooms() {
     return await room.find({});
+}
+
+/**
+ * @name deleteRoom
+ * @param  {string} id - ID of the room to delete
+ * @returns {Promise<iListItem>} - Returns all new rooms
+ */
+export async function deleteRoom(id: string) {
+    return await room.findByIdAndRemove(new Types.ObjectId(id));
 }
