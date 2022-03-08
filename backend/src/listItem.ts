@@ -35,3 +35,12 @@ export async function createListItem(teamName: string, room: string, minutes: nu
 export async function getItems() {
     return await listItem.find({});
 }
+
+/**
+ * @name deleteListItem
+ * @param  {string} id - ID of the item to delete
+ * @returns {Promise<iListItem>} - Returns all new items
+ */
+export async function deleteListItem(id: string) {
+    return await listItem.findByIdAndRemove(new Types.ObjectId(id));
+}
