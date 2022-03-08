@@ -2,6 +2,7 @@
 import express from 'express';
 import ip from 'ip';
 import * as dotenv from 'dotenv';
+import path from 'path';
 
 //Configuring dotenv
 if (process.env.NODE_ENV === 'development') dotenv.config();
@@ -26,6 +27,9 @@ import roomRoutes from './routes/roomRoutes';
 
 app.use('/api/items', itemsRoutes);
 app.use('/api/rooms', roomRoutes);
+
+//Add Display Frontend Build
+app.use('/', express.static(path.join(path.resolve(), '../frontend-display/public')));
 
 app.listen(port, () => {
     console.log(
