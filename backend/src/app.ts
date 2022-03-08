@@ -2,6 +2,7 @@
 import express from 'express';
 import ip from 'ip';
 import * as dotenv from 'dotenv';
+import history from 'connect-history-api-fallback';
 import path from 'path';
 
 //Configuring dotenv
@@ -28,8 +29,11 @@ import roomRoutes from './routes/roomRoutes';
 app.use('/api/items', itemsRoutes);
 app.use('/api/rooms', roomRoutes);
 
-//Add Display Frontend Build
-app.use('/', express.static(path.join(path.resolve(), '../frontend-display/public')));
+//Configure Express for Vue History Mode
+app.use(history());
+
+//Add Frontend Build
+app.use('/', express.static(path.join(path.resolve(), '../frontend/dist')));
 
 app.listen(port, () => {
     console.log(
