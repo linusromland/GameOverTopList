@@ -5,9 +5,7 @@
 				<span class="pl-2 text-black font-semibold text-xl">Game Over Escape Rooms Ullevi</span></router-link
 			>
 			<div class="relative flex items-center lg:ml-auto">
-				<router-link to="/listItems" class="text-slate-200 cursor-pointer text-right text-xl mx-2">
-					Tider
-				</router-link>
+				<router-link to="/" class="text-slate-200 cursor-pointer text-right text-xl mx-2"> Tider </router-link>
 				<router-link to="/rooms" class="text-slate-200 cursor-pointer text-right text-xl mx-2">
 					Rum
 				</router-link>

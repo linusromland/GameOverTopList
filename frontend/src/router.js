@@ -4,7 +4,7 @@ export default createRouter({
 	history: createWebHistory(),
 	routes: [
 		{
-			component: () => import('./views/Home.vue'),
+			component: () => import('./views/Scores.vue'),
 			path: '/'
 		},
 		{
