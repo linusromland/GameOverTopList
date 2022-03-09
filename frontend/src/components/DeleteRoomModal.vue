@@ -1,6 +1,11 @@
 <template>
 	<!--Button to show Delete Room Modal-->
-	<button @click="showDeleteModal">Ta bort rum</button>
+	<button
+		@click="showDeleteModal"
+		class="bg-red-500 hover:bg-red-400 text-white p-1 rounded-md m-2 h-8 cursor-pointer"
+	>
+		Ta bort rum
+	</button>
 
 	<!--Create Room Modal -->
 	<Modal

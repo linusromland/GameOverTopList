@@ -1,5 +1,10 @@
 <template>
-	<button @click="showEditModal">Redigera Rum</button>
+	<button
+		@click="showEditModal"
+		class="bg-gray-500 hover:bg-gray-400 text-white p-1 rounded-md m-2 h-8 cursor-pointer"
+	>
+		Redigera Rum
+	</button>
 	<!--Edit Room Modal -->
 	<Modal
 		v-if="editModal"
