@@ -1,5 +1,4 @@
 <script>
-	import Navbar from '../components/Navbar.vue';
 	import CreateRoomModal from '../components/CreateRoomModal.vue';
 	import EditRoomModal from '../components/EditRoomModal.vue';
 	import DeleteRoomModal from '../components/DeleteRoomModal.vue';
@@ -9,8 +8,7 @@
 		components: {
 			CreateRoomModal,
 			EditRoomModal,
-			DeleteRoomModal,
-			Navbar
+			DeleteRoomModal
 		},
 		data() {
 			return {
@@ -30,7 +28,6 @@
 	};
 </script>
 <template>
-	<Navbar />
 	<div class="flex flex-col items-center bg-slate-200 p-3 main-content">
 		<div class="flex items-center">
 			<h1 class="text-4xl font-semibold">Rummen</h1>
