@@ -1,10 +1,14 @@
 <script>
 	import CreateRoomModal from '../components/CreateRoomModal.vue';
+	import EditRoomModal from '../components/EditRoomModal.vue';
+	import DeleteRoomModal from '../components/DeleteRoomModal.vue';
 
 	export default {
 		name: 'Rooms',
 		components: {
-			CreateRoomModal
+			CreateRoomModal,
+			EditRoomModal,
+			DeleteRoomModal
 		},
 		data() {
 			return {
@@ -27,7 +31,7 @@
 	<CreateRoomModal @refresh="getRooms" />
 	<div v-for="(room, index) in rooms" :key="index">
 		<h1 class="text-3xl text-cyan-400">{{ room.roomName }}</h1>
-		<button>Redigera</button>
-		<button>Ta bort</button>
+		<EditRoomModal :room="room" @refresh="getRooms" />
+		<DeleteRoomModal :room="room" @refresh="getRooms" />
 	</div>
 </template>
