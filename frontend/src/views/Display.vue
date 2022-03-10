@@ -1,8 +1,8 @@
 <template>
 	<div class="main-content w-full py-4 bg-slate-600 flex justify-center">
 		<div v-if="rooms" class="w-5/6 flex flex-col items-center">
-			<h1 class="text-6xl font-bold text-white">{{ activeRoom.roomName }}</h1>
-			<RoomDisplay :roomID="activeRoom._id" />
+			<h1 class="text-6xl font-bold text-white">{{ this.rooms[this.activeRoomIndex].roomName }}</h1>
+			<RoomDisplay :roomID="this.rooms[this.activeRoomIndex]._id" ref="activeDisplay" />
 		</div>
 	</div>
 </template>
@@ -27,15 +27,18 @@
 				const response = await request.json();
 				this.rooms = response;
 				this.activeRoomIndex = this.rooms.length - 1;
-			}
-		},
-		computed: {
-			activeRoom() {
-				return this.rooms[this.activeRoomIndex];
+			},
+			startInterval() {
+				setInterval(() => {
+					this.activeRoomIndex =
+						this.activeRoomIndex === this.rooms.length - 1 ? 0 : this.activeRoomIndex + 1;
+					this.$refs.activeDisplay.getScores(this.rooms[this.activeRoomIndex]._id);
+				}, 15000);
 			}
 		},
 		mounted() {
 			this.getRooms();
+			this.startInterval();
 		}
 	};
 </script>

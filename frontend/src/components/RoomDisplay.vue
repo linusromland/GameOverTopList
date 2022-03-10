@@ -9,7 +9,11 @@
 					<th class="text-3xl p-2 m-4">Tid</th>
 					<th class="text-3xl p-2 m-4">Ledtrådar</th>
 				</tr>
-				<tr v-for="(score, index) in scores" :key="index" :class="{ 'border-b': index < scores.length - 1 }">
+				<tr
+					v-for="(score, index) in scores"
+					:key="score._id"
+					:class="{ 'border-b': index < scores.length - 1 }"
+				>
 					<td class="text-2xl p-2 m-4">{{ index + 1 }}.</td>
 
 					<td class="text-2xl p-2 m-4">{{ score.teamName }}</td>
@@ -28,7 +32,11 @@
 					<th class="text-3xl p-2 m-4">Tid</th>
 					<th class="text-3xl p-2 m-4">Ledtrådar</th>
 				</tr>
-				<tr v-for="(score, index) in scores" :key="index" :class="{ 'border-b': index < scores.length - 1 }">
+				<tr
+					v-for="(score, index) in scores"
+					:key="score._id"
+					:class="{ 'border-b': index < scores.length - 1 }"
+				>
 					<td class="text-2xl p-2 m-4">{{ index + 1 }}.</td>
 
 					<td class="text-2xl p-2 m-4">{{ score.teamName }}</td>
@@ -56,8 +64,8 @@
 			}
 		},
 		methods: {
-			async getScores() {
-				const request = await fetch(`/api/items/${this.roomID}`);
+			async getScores(roomID) {
+				const request = await fetch(`/api/items/${roomID}`);
 				const response = await request.json();
 				this.scores = response;
 				this.scores.map((scores) => (scores.time = this.time(scores.time)));
@@ -68,9 +76,8 @@
 				return `${minutes}min ${secondsLeft}s`;
 			}
 		},
-
 		mounted() {
-			this.getScores();
+			this.getScores(this.roomID);
 		}
 	};
 </script>
