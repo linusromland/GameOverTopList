@@ -26,6 +26,8 @@ router.post('/create', async (req: Request, res: Response) => {
     const roomID = req.body.room;
     const room = await getRooms();
     const roomExists = room.find((room) => room.id === roomID);
+    console.log(req.body);
+
     if (!roomExists) {
         res.json({
             error: 'Room does not exist',

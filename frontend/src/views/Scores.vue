@@ -1,9 +1,15 @@
 <script>
+	import CreateScoreModal from '../components/CreateScoreModal.vue';
+
 	export default {
 		name: 'Rooms',
+		components: {
+			CreateScoreModal
+		},
 		data() {
 			return {
-				scores: []
+				scores: [],
+				selectedRoom: 0
 			};
 		},
 		methods: {
@@ -11,10 +17,16 @@
 				const request = await fetch('/api/items');
 				const response = await request.json();
 				this.scores = response;
+			},
+			async getRooms() {
+				const response = await fetch('/api/rooms');
+				const data = await response.json();
+				this.rooms = data;
 			}
 		},
 		mounted() {
 			this.getScores();
+			this.getRooms();
 		}
 	};
 </script>
@@ -22,6 +34,15 @@
 	<div class="flex flex-col items-center bg-slate-200 p-3 main-content">
 		<div class="flex items-center">
 			<h1 class="text-4xl font-semibold">Tider</h1>
+		</div>
+		<div>
+			<select class="p-2 mt-1 rounded-md bg-gray-200 text-black" v-model="selectedRoom">
+				<option value="0" selected>Alla rum</option>
+				<option v-for="(room, index) in rooms" :key="index" :value="room._id">
+					{{ room.roomName }}
+				</option>
+			</select>
+			<CreateScoreModal @refresh="getScores" />
 		</div>
 		<div
 			v-for="(score, index) in scores"
