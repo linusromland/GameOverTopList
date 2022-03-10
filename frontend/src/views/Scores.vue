@@ -12,7 +12,7 @@
 			return {
 				allScores: [],
 				selectedRoom: 0,
-				sortScores: '0',
+				sortByFilter: '0',
 				search: '',
 				rooms: [],
 				filteredScores: []
@@ -44,7 +44,12 @@
 				const sortedBySearched = sortedByRoom.filter((score) =>
 					score.teamName.toLowerCase().includes(this.search.toLowerCase())
 				);
-				this.filteredScores = sortedBySearched;
+				if (this.sortByFilter == 0) {
+					this.filteredScores = sortedBySearched;
+				} else {
+					//Sort by fastest time
+					this.filteredScores = sortedBySearched.sort((a, b) => a.time - b.time);
+				}
 			}
 		},
 		async created() {
@@ -85,11 +90,11 @@
 				</select>
 				<select
 					class="p-2 my-3 rounded-md bg-slate-300 hover:bg-slate-400 text-black"
-					v-model="sortScores"
+					v-model="sortByFilter"
 					@change="sortScore"
 				>
 					<option value="0" selected>Senast tillagd</option>
-					<option value="0">Bästa tid</option>
+					<option value="1">Bästa tid</option>
 				</select>
 			</div>
 			<div v-if="filteredScores.length > 0">
