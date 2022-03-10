@@ -15,7 +15,7 @@ const ListItemSchema = new Schema({
         required: true,
     },
     clues: {
-        type: Number,
+        type: String,
         required: true,
     },
     time: {

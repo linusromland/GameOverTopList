@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-slate-300 hover:bg-slate-400 m-2 p-2 rounded flex justify-around">
+	<div class="bg-slate-300 hover:bg-slate-400 m-2 p-4 rounded flex justify-between">
 		<div>
 			<p>
 				<span class="font-bold text-2xl">{{ score.teamName }}</span>
@@ -38,9 +38,6 @@
 				const secondsLeft = seconds % 60;
 				return `${minutes}${secondsLeft < 10 ? '0' : ''}min ${secondsLeft}s`;
 			}
-		},
-		mounted() {
-			console.log('score', this.score);
 		}
 	};
 </script>

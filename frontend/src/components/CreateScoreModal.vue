@@ -2,7 +2,7 @@
 	<!--Button to show create Score Modal-->
 	<button
 		@click="showScoreModal"
-		class="bg-blue-500 hover:bg-blue-400 text-white p-1 rounded-md m-2 h-8 cursor-pointer"
+		class="bg-blue-500 hover:bg-blue-400 text-white p-2 rounded-md m-2 h-10 cursor-pointer"
 	>
 		Skapa ny tid
 	</button>

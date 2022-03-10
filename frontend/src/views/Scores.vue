@@ -12,7 +12,10 @@
 			return {
 				allScores: [],
 				selectedRoom: 0,
-				rooms: []
+				sortScores: '0',
+				search: '',
+				rooms: [],
+				filteredScores: []
 			};
 		},
 		methods: {
@@ -32,17 +35,22 @@
 			getRoomName(roomID) {
 				const room = this.rooms.find((room) => room._id == roomID);
 				return room.roomName;
-			}
-		},
-		computed: {
-			filteredScores() {
-				if (this.selectedRoom == 0) return this.allScores;
-				return this.allScores.filter((score) => score.room === this.selectedRoom);
+			},
+			sortScore() {
+				const sortedByRoom =
+					this.selectedRoom == 0
+						? this.allScores
+						: this.allScores.filter((score) => score.room === this.selectedRoom);
+				const sortedBySearched = sortedByRoom.filter((score) =>
+					score.teamName.toLowerCase().includes(this.search.toLowerCase())
+				);
+				this.filteredScores = sortedBySearched;
 			}
 		},
 		async created() {
 			await this.getRooms();
 			await this.getScores();
+			this.sortScore();
 		}
 	};
 </script>
@@ -52,20 +60,42 @@
 			<h1 class="text-4xl font-semibold">Tider</h1>
 		</div>
 		<div>
-			<select class="p-2 mt-1 rounded-md bg-gray-200 text-black" v-model="selectedRoom">
-				<option value="0" selected>Alla rum</option>
-				<option v-for="(room, index) in rooms" :key="index" :value="room._id">
-					{{ room.roomName }}
-				</option>
-			</select>
 			<CreateScoreModal @refresh="getScores" />
 		</div>
-		<div v-if="filteredScores.length > 0" class="lg:w-2/5 w-10/12">
-			<Score v-for="(score, index) in filteredScores" :key="index" :score="score" @refresh="getScores" />
-		</div>
-
-		<div v-else>
-			<p class="text-center">Hittade inga tider</p>
+		<div class="lg:w-2/6 w-10/12">
+			<div class="w-full flex justify-around">
+				<input
+					type="text"
+					class="my-3 rounded-md bg-slate-300 text-black text-center"
+					placeholder="Sök"
+					autocomplete="off"
+					maxlength="24"
+					v-model="search"
+					@input="sortScore"
+				/>
+				<select
+					class="p-2 m-3 rounded-md bg-slate-300 hover:bg-slate-400 text-black"
+					v-model="selectedRoom"
+					@change="sortScore"
+				>
+					<option value="0" selected>Alla rum</option>
+					<option v-for="(room, index) in rooms" :key="index" :value="room._id">
+						{{ room.roomName }}
+					</option>
+				</select>
+				<select
+					class="p-2 my-3 rounded-md bg-slate-300 hover:bg-slate-400 text-black"
+					v-model="sortScores"
+					@change="sortScore"
+				>
+					<option value="0" selected>Senast tillagd</option>
+					<option value="0">Bästa tid</option>
+				</select>
+			</div>
+			<div v-if="filteredScores.length > 0">
+				<Score v-for="(score, index) in filteredScores" :key="index" :score="score" @refresh="getScores" />
+			</div>
+			<p v-else class="text-center">Hittade inga tider</p>
 		</div>
 	</div>
 </template>

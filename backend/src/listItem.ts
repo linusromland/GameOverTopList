@@ -34,7 +34,7 @@ export async function createListItem(teamName: string, room: string, clues: numb
  * @description This function returns all the boards
  */
 export async function getItems() {
-    return await listItem.find({});
+    return await listItem.find({}).sort({ createdAt: -1 });
 }
 
 /**

@@ -26,6 +26,7 @@ router.post('/create', async (req: Request, res: Response) => {
     const roomID = req.body.room;
     const room = await getRooms();
     const roomExists = room.find((room) => room.id === roomID);
+    console.log(req.body.clues);
 
     if (!roomExists) {
         res.json({
@@ -34,7 +35,13 @@ router.post('/create', async (req: Request, res: Response) => {
         return;
     }
 
-    await createListItem(req.body.teamName, req.body.room, req.body.clues, req.body.minutes, req.body.seconds);
+    await createListItem(
+        req.body.teamName,
+        req.body.room,
+        req.body.clues.toString(),
+        req.body.minutes,
+        req.body.seconds,
+    );
     const items = await getItems();
 
     res.json(items).status(200);
