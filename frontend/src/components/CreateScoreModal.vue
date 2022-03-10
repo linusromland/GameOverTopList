@@ -146,7 +146,6 @@
 		},
 		mounted() {
 			this.getRooms();
-			console.log(this.rooms);
 		}
 	};
 </script>

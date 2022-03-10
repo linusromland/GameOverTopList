@@ -1,32 +1,48 @@
 <script>
 	import CreateScoreModal from '../components/CreateScoreModal.vue';
+	import Score from '../components/Score.vue';
 
 	export default {
 		name: 'Rooms',
 		components: {
-			CreateScoreModal
+			CreateScoreModal,
+			Score
 		},
 		data() {
 			return {
-				scores: [],
-				selectedRoom: 0
+				allScores: [],
+				selectedRoom: 0,
+				rooms: []
 			};
 		},
 		methods: {
 			async getScores() {
 				const request = await fetch('/api/items');
 				const response = await request.json();
-				this.scores = response;
+				this.allScores = response;
+				this.allScores.map((score) => {
+					score.roomName = this.getRoomName(score.room);
+				});
 			},
 			async getRooms() {
 				const response = await fetch('/api/rooms');
 				const data = await response.json();
 				this.rooms = data;
+			},
+			getRoomName(roomID) {
+				const room = this.rooms.find((room) => room._id == roomID);
+				return room.roomName;
 			}
 		},
-		mounted() {
-			this.getScores();
-			this.getRooms();
+		computed: {
+			filteredScores() {
+				if (this.selectedRoom == 0) return this.allScores;
+				return this.allScores.filter((score) => score.room === this.selectedRoom);
+			}
+		},
+		async created() {
+			await this.getRooms();
+			await this.getScores();
 		}
 	};
 </script>
@@ -44,12 +60,12 @@
 			</select>
 			<CreateScoreModal @refresh="getScores" />
 		</div>
-		<div
-			v-for="(score, index) in scores"
-			:key="index"
-			class="flex flex-col w-full md:w-2/4 lg:w-1/4 items-center bg-gray-300 m-3 p-2 rounded"
-		>
-			<p>{{ score }}</p>
+		<div v-if="filteredScores.length > 0">
+			<Score v-for="(score, index) in filteredScores" :key="index" :score="score" />
+		</div>
+
+		<div v-else>
+			<p class="text-center">Hittade inga tider</p>
 		</div>
 	</div>
 </template>
