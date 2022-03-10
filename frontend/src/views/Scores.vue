@@ -60,8 +60,8 @@
 			</select>
 			<CreateScoreModal @refresh="getScores" />
 		</div>
-		<div v-if="filteredScores.length > 0">
-			<Score v-for="(score, index) in filteredScores" :key="index" :score="score" />
+		<div v-if="filteredScores.length > 0" class="lg:w-2/5 w-10/12">
+			<Score v-for="(score, index) in filteredScores" :key="index" :score="score" @refresh="getScores" />
 		</div>
 
 		<div v-else>

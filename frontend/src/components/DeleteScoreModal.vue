@@ -4,7 +4,7 @@
 		@click="showDeleteModal"
 		class="bg-red-500 hover:bg-red-400 text-white p-1 rounded-md m-2 h-8 cursor-pointer"
 	>
-		Ta bort rum
+		Ta bort tid
 	</button>
 
 	<!--Create Room Modal -->
@@ -14,7 +14,7 @@
 		@submit="deleteRoom"
 		:showSubmitBtn="true"
 		submitBtnValue="Ta bort"
-		:title="`Du håller på att ta bort rummet ${room.roomName}!`"
+		:title="`Du håller på att ta bort en tid från laget ${score.teamName}!`"
 		:error="error"
 		:errorMessage="errorMessage"
 	>
@@ -25,7 +25,7 @@
 <script>
 	import Modal from './Modal.vue';
 	export default {
-		name: 'DeleteRoomModal',
+		name: 'DeleteScoreModal',
 		components: {
 			Modal
 		},
@@ -38,7 +38,7 @@
 			};
 		},
 		props: {
-			room: {
+			score: {
 				type: Object,
 				required: true
 			}
@@ -53,14 +53,14 @@
 
 				this.deleteModal = false;
 
-				const request = await fetch(`/api/rooms/delete/${this.room._id}`, {
+				const request = await fetch(`/api/items/delete/${this.score._id}`, {
 					method: 'DELETE',
 					headers: {
 						'Content-Type': 'application/json'
 					}
 				});
 				if ((await request.status) === 200) {
-					console.log('Deleted room successfully');
+					console.log('Deleted score successfully');
 					this.$emit('refresh');
 				}
 			}
