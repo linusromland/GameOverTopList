@@ -2,7 +2,7 @@
 import { Request, Response, Router } from 'express';
 
 //Local Dependencies Import
-import { createListItem, getItems, deleteListItem } from '../listItem';
+import { createListItem, getItems, getItemsWithID, deleteListItem } from '../listItem';
 import { getRooms } from '../room';
 import iListItem from '../interfaces/iListItem';
 
@@ -15,6 +15,14 @@ const router = Router();
  */
 router.get('/', async (req: Request, res: Response) => {
     res.json(await getItems()).status(200);
+});
+
+/**
+ * @name get/items/:id
+ * @description This route returns all the items for the room with the given id
+ */
+router.get('/:roomID', async (req: Request, res: Response) => {
+    res.json(await getItemsWithID(req.params.roomID)).status(200);
 });
 
 /**
@@ -34,6 +42,7 @@ router.post('/create', async (req: Request, res: Response) => {
         }).status(400);
         return;
     }
+    console.log(req.body);
 
     await createListItem(
         req.body.teamName,

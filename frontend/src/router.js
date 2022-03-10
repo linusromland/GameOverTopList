@@ -10,6 +10,10 @@ export default createRouter({
 		{
 			component: () => import('./views/Rooms.vue'),
 			path: '/rooms'
+		},
+		{
+			component: () => import('./views/Display.vue'),
+			path: '/display'
 		}
 	]
 });

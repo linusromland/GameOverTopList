@@ -7,7 +7,9 @@
 			<p class="text-lg">
 				{{ time }}
 			</p>
-			<p class="text-md">Antalet ledtrådar: {{ score.clues }}</p>
+			<p class="text-md">
+				Antal ledtrådar: <span class="font-bold">{{ score.clues }}</span>
+			</p>
 			<p>
 				Rum: <span class="font-bold">{{ score.roomName }}</span>
 			</p>
@@ -36,7 +38,7 @@
 				const seconds = this.score.time;
 				const minutes = Math.floor(seconds / 60);
 				const secondsLeft = seconds % 60;
-				return `${minutes}${secondsLeft < 10 ? '0' : ''}min ${secondsLeft}s`;
+				return `${minutes}min ${secondsLeft}s`;
 			}
 		}
 	};

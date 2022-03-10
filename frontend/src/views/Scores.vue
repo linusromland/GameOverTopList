@@ -20,14 +20,17 @@
 		},
 		methods: {
 			async getScores() {
+				console.log('Getting scores');
 				const request = await fetch('/api/items');
 				const response = await request.json();
 				this.allScores = response;
 				this.allScores.map((score) => {
 					score.roomName = this.getRoomName(score.room);
 				});
+				this.sortScore();
 			},
 			async getRooms() {
+				console.log('Getting rooms');
 				const response = await fetch('/api/rooms');
 				const data = await response.json();
 				this.rooms = data;
@@ -55,7 +58,6 @@
 		async created() {
 			await this.getRooms();
 			await this.getScores();
-			this.sortScore();
 		}
 	};
 </script>

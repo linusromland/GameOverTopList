@@ -30,11 +30,21 @@ export async function createListItem(teamName: string, room: string, clues: numb
 
 /**
  * @name getItems
- * @returns {Promise<iListItem[]>} - Returns the boards
- * @description This function returns all the boards
+ * @returns {Promise<iListItem[]>} - Returns the scores
+ * @description This function returns all the scores
  */
 export async function getItems() {
     return await listItem.find({}).sort({ createdAt: -1 });
+}
+
+/**
+ * @name getItemsWithID
+ * @param roomID string - The room ID
+ * @returns {Promise<iListItem[]>} - Returns the scores
+ * @description This function returns all the scores with the given id
+ */
+export async function getItemsWithID(roomID: string) {
+    return await listItem.find({ room: new Types.ObjectId(roomID) }).sort({ createdAt: -1 });
 }
 
 /**
