@@ -21,8 +21,11 @@
 				<input
 					v-if="showSubmitBtn"
 					type="submit"
-					class="w-1/2 p-2 rounded-md m-2 bg-blue-500 hover:bg-blue-400 text-white cursor-pointer"
+					:class="`w-1/2 p-2 rounded-md m-2 bg-blue-500 hover:bg-blue-400 disabled:bg-blue-300 text-white ${
+						disabledSubmitButton ? 'cursor-not-allowed' : 'cursor-pointer'
+					}`"
 					:value="submitBtnValue"
+					:disabled="disabledSubmitButton"
 					@click="submit"
 				/>
 			</div>
@@ -78,6 +81,11 @@
 				//Error message
 				type: String,
 				default: ''
+			},
+			disabledSubmitButton: {
+				//Boolean to disable submit button
+				type: Boolean,
+				default: false
 			}
 		},
 		emits: ['close', 'submit'], //Events emitted by this component

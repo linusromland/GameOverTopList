@@ -17,6 +17,7 @@
 		title="Lägg till tid"
 		:error="error"
 		:errorMessage="errorMessage"
+		:disabledSubmitButton="disabledSubmitButton"
 	>
 		<div class="w-5/6 flex flex-col m-2">
 			<label for="roomSelector">Välj rum: <span class="text-red-600">*</span></label>
@@ -37,6 +38,7 @@
 				maxlength="42"
 				v-model="teamName"
 				required
+				@input="checkInput"
 			/>
 		</div>
 		<div class="w-5/6 flex flex-col m-2">
@@ -52,6 +54,7 @@
 				min="0"
 				v-model="clues"
 				required
+				@input="checkInput"
 			/>
 		</div>
 		<div class="w-5/6 flex flex-col m-2">
@@ -67,6 +70,7 @@
 				min="0"
 				v-model="minutes"
 				required
+				@input="checkInput"
 			/>
 		</div>
 		<div class="w-5/6 flex flex-col m-2">
@@ -81,6 +85,20 @@
 				min="0"
 				v-model="seconds"
 				required
+				@input="checkInput"
+			/>
+		</div>
+		<div class="w-5/6 flex flex-col m-2">
+			<label for="dataSelector">Datum: </label>
+			<input
+				id="dataSelector"
+				type="date"
+				class="p-2 rounded-md bg-gray-200 text-black"
+				placeholder="Datum"
+				autocomplete="off"
+				maxlength="42"
+				v-model="datePicker"
+				@input="checkInput"
 			/>
 		</div>
 	</Modal>
@@ -100,11 +118,13 @@
 				teamName: '',
 				roomID: '',
 				clues: 0,
-				minutes: 0,
+				minutes: 1,
 				seconds: 0,
 				rooms: [],
 				error: false,
-				errorMessage: ''
+				errorMessage: '',
+				datePicker: this.today(),
+				disabledSubmitButton: true
 			};
 		},
 		methods: {
@@ -136,11 +156,22 @@
 					this.roomName = '';
 					this.teamName = '';
 					this.clues = 0;
-					this.minutes = 0;
+					this.minutes = 1;
 					this.seconds = 0;
+					this.datePicker = this.today();
 				} else {
 					this.error = true;
 					this.errorMessage = 'Något gick fel';
+				}
+			},
+			today() {
+				return new Date().toLocaleDateString('sv-SE');
+			},
+			checkInput() {
+				if (this.teamName.length > 0 && this.clues >= 0 && this.minutes > 0 && this.seconds >= 0) {
+					this.disabledSubmitButton = false;
+				} else {
+					this.disabledSubmitButton = true;
 				}
 			}
 		},
