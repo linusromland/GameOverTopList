@@ -2,9 +2,9 @@
 import { Request, Response, Router } from 'express';
 
 //Local Dependencies Import
-import { createListItem, getItems, getItemsWithID, deleteListItem } from '../listItem';
+import { createScore, getScores, getScoresWithID, deleteScore } from '../score';
 import { getRooms } from '../room';
-import iListItem from '../interfaces/iListItem';
+import iListItem from '../interfaces/iScore';
 
 //Variable Declarations
 const router = Router();
@@ -14,7 +14,7 @@ const router = Router();
  * @description This route returns all the items
  */
 router.get('/', async (req: Request, res: Response) => {
-    res.json(await getItems()).status(200);
+    res.json(await getScores()).status(200);
 });
 
 /**
@@ -22,7 +22,7 @@ router.get('/', async (req: Request, res: Response) => {
  * @description This route returns all the items for the room with the given id
  */
 router.get('/:roomID', async (req: Request, res: Response) => {
-    res.json(await getItemsWithID(req.params.roomID)).status(200);
+    res.json(await getScoresWithID(req.params.roomID)).status(200);
 });
 
 /**
@@ -34,24 +34,14 @@ router.post('/create', async (req: Request, res: Response) => {
     const roomID = req.body.room;
     const room = await getRooms();
     const roomExists = room.find((room) => room.id === roomID);
-    console.log(req.body.clues);
-
     if (!roomExists) {
         res.json({
             error: 'Room does not exist',
         }).status(400);
         return;
     }
-    console.log(req.body);
-
-    await createListItem(
-        req.body.teamName,
-        req.body.room,
-        req.body.clues.toString(),
-        req.body.minutes,
-        req.body.seconds,
-    );
-    const items = await getItems();
+    await createScore(req.body.teamName, req.body.room, req.body.clues, req.body.minutes, req.body.seconds);
+    const items = await getScores();
 
     res.json(items).status(200);
 });
@@ -63,7 +53,7 @@ router.post('/create', async (req: Request, res: Response) => {
 router.delete('/delete/:id', async (req: Request, res: Response) => {
     //Check that itemID is valid
     const itemID = req.params.id;
-    const item = await getItems();
+    const item = await getScores();
     const itemExists = item.find((item: iListItem) => item._id.toString() === itemID);
     if (!itemExists) {
         res.json({
@@ -73,8 +63,8 @@ router.delete('/delete/:id', async (req: Request, res: Response) => {
     }
 
     //Delete item
-    await deleteListItem(itemID);
-    const items = await getItems();
+    await deleteScore(itemID);
+    const items = await getScores();
 
     res.json(items).status(200);
 });

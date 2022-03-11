@@ -2,10 +2,10 @@
 import { Schema, model } from 'mongoose';
 
 //Local Dependencies Import
-import iListItem from '../interfaces/iListItem';
+import iScore from '../interfaces/iScore';
 
 //Creates the Schema
-const ListItemSchema = new Schema({
+const ScoreSchema = new Schema({
     teamName: {
         type: String,
         required: true,
@@ -15,7 +15,7 @@ const ListItemSchema = new Schema({
         required: true,
     },
     clues: {
-        type: String,
+        type: Number,
         required: true,
     },
     time: {
@@ -29,7 +29,7 @@ const ListItemSchema = new Schema({
 });
 
 //Creates the model from Schema
-const Board = model<iListItem>('listItem', ListItemSchema);
+const Score = model<iScore>('Score', ScoreSchema);
 
 //Exports the model
-export default Board;
+export default Score;

@@ -65,7 +65,7 @@
 		},
 		methods: {
 			async getScores(roomID) {
-				const request = await fetch(`/api/items/${roomID}`);
+				const request = await fetch(`/api/scores/${roomID}`);
 				const response = await request.json();
 				this.scores = response;
 				this.scores.map((scores) => (scores.time = this.time(scores.time)));

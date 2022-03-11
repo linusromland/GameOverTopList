@@ -53,7 +53,7 @@
 
 				this.deleteModal = false;
 
-				const request = await fetch(`/api/items/delete/${this.score._id}`, {
+				const request = await fetch(`/api/scores/delete/${this.score._id}`, {
 					method: 'DELETE',
 					headers: {
 						'Content-Type': 'application/json'

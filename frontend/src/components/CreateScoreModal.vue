@@ -117,7 +117,7 @@
 				this.rooms = data;
 			},
 			async createScore() {
-				const response = await fetch('/api/items/create', {
+				const response = await fetch('/api/scores/create', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'

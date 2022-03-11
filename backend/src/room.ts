@@ -2,7 +2,7 @@
 import { Types } from 'mongoose';
 
 //Local Dependencies Import
-import room from './models/room';
+import room from './models/Room';
 
 /**
  * @name createRoom

@@ -21,7 +21,7 @@
 		methods: {
 			async getScores() {
 				console.log('Getting scores');
-				const request = await fetch('/api/items');
+				const request = await fetch('/api/scores');
 				const response = await request.json();
 				this.allScores = response;
 				this.allScores.map((score) => {

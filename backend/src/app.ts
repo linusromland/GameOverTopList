@@ -23,10 +23,10 @@ app.use(express.json());
 connectToMongoDB('GameOverTopList', mongoURL);
 
 //Routes import
-import itemsRoutes from './routes/itemsRoutes';
+import scoreRoutes from './routes/scoreRoutes';
 import roomRoutes from './routes/roomRoutes';
 
-app.use('/api/items', itemsRoutes);
+app.use('/api/scores', scoreRoutes);
 app.use('/api/rooms', roomRoutes);
 
 //Configure Express for Vue History Mode
