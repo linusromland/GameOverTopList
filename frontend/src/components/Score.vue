@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-slate-300 hover:bg-slate-400 m-2 p-4 rounded flex justify-between">
+	<div class="bg-card m-2 p-4 rounded flex justify-between">
 		<div>
 			<p>
 				<span class="font-bold text-2xl">{{ score.teamName }}</span>

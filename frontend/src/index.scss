@@ -6,3 +6,7 @@
 * {
 	transition: background 0.15s ease-in-out;
 }
+
+.bg-card {
+	@apply bg-slate-300 hover:bg-slate-400;
+}

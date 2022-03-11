@@ -36,7 +36,7 @@
 		<div
 			v-for="(room, index) in rooms"
 			:key="index"
-			class="flex flex-col w-full md:w-2/4 lg:w-1/4 items-center bg-gray-300 m-3 p-2 rounded"
+			class="flex flex-col w-full md:w-2/4 lg:w-1/4 items-center bg-card m-3 p-2 rounded"
 		>
 			<h1 class="text-3xl text-black">{{ room.roomName }}</h1>
 			<div class="flex">

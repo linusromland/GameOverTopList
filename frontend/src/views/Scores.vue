@@ -80,21 +80,13 @@
 					v-model="search"
 					@input="sortScore"
 				/>
-				<select
-					class="p-2 m-3 rounded-md bg-slate-300 hover:bg-slate-400 text-black"
-					v-model="selectedRoom"
-					@change="sortScore"
-				>
+				<select class="p-2 m-3 rounded-md bg-card text-black" v-model="selectedRoom" @change="sortScore">
 					<option value="0" selected>Alla rum</option>
 					<option v-for="(room, index) in rooms" :key="index" :value="room._id">
 						{{ room.roomName }}
 					</option>
 				</select>
-				<select
-					class="p-2 my-3 rounded-md bg-slate-300 hover:bg-slate-400 text-black"
-					v-model="sortByFilter"
-					@change="sortScore"
-				>
+				<select class="p-2 my-3 rounded-md bg-card text-black" v-model="sortByFilter" @change="sortScore">
 					<option value="0" selected>Senast tillagd</option>
 					<option value="1">Bästa tid</option>
 				</select>
