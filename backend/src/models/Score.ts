@@ -22,6 +22,10 @@ const ScoreSchema = new Schema({
         type: Number,
         required: true,
     },
+    date: {
+        type: Date,
+        required: true,
+    },
     createdAt: {
         type: Date,
         default: Date.now,

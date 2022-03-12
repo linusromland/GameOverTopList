@@ -137,6 +137,8 @@
 				this.rooms = data;
 			},
 			async createScore() {
+				//Convert YYYY-MM-DD to date object
+				const date = new Date(this.datePicker);
 				const response = await fetch('/api/scores/create', {
 					method: 'POST',
 					headers: {
@@ -147,7 +149,8 @@
 						teamName: this.teamName,
 						clues: this.clues,
 						minutes: this.minutes,
-						seconds: this.seconds
+						seconds: this.seconds,
+						date
 					})
 				});
 				if ((await response.status) === 200) {

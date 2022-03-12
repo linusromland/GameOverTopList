@@ -11,7 +11,14 @@ import Score from './models/Score';
  * @returns {Promise<iScore>} - Returns the created score
  * @description This function creates a new score
  */
-export async function createScore(teamName: string, room: string, clues: number, minutes: number, seconds: number) {
+export async function createScore(
+    teamName: string,
+    room: string,
+    clues: number,
+    minutes: number,
+    seconds: number,
+    date: Date,
+) {
     if (
         teamName &&
         room &&
@@ -20,7 +27,8 @@ export async function createScore(teamName: string, room: string, clues: number,
         typeof minutes == 'number' &&
         minutes > 0 &&
         typeof seconds == 'number' &&
-        seconds >= 0
+        seconds >= 0 &&
+        date
     ) {
         const time = minutes * 60 + seconds;
         const item = new Score({
@@ -28,6 +36,7 @@ export async function createScore(teamName: string, room: string, clues: number,
             room,
             clues,
             time,
+            date,
         });
 
         //Saves the board

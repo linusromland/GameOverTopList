@@ -40,7 +40,14 @@ router.post('/create', async (req: Request, res: Response) => {
         }).status(400);
         return;
     }
-    await createScore(req.body.teamName, req.body.room, req.body.clues, req.body.minutes, req.body.seconds);
+    await createScore(
+        req.body.teamName,
+        req.body.room,
+        req.body.clues,
+        req.body.minutes,
+        req.body.seconds,
+        req.body.date,
+    );
     const items = await getScores();
 
     res.json(items).status(200);

@@ -8,5 +8,6 @@ export default interface iBoard {
     room: string;
     minutes: number;
     seconds: number;
+    date: Date;
     createdAt: Date;
 }
