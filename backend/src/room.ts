@@ -1,5 +1,7 @@
 //External Dependencies Import
 import { Types } from 'mongoose';
+import fs from 'fs';
+import path from 'path';
 
 //Local Dependencies Import
 import room from './models/Room';
@@ -11,6 +13,13 @@ import room from './models/Room';
  * @description This function creates a new board
  */
 export async function createRoom(roomName: string) {
+    //Create roomImages folder for the room
+    const roomImagesPath = path.resolve(`${__dirname}/../../frontend/public/roomImages/${roomName}`);
+
+    if (!fs.existsSync(roomImagesPath)) {
+        fs.mkdirSync(roomImagesPath);
+    }
+
     if (roomName) {
         const createdRoom = new room({
             roomName,
@@ -21,6 +30,33 @@ export async function createRoom(roomName: string) {
     } else {
         return false;
     }
+}
+
+/**
+ * @name getRandomImage
+ * @param  {string} roomID - ID of the room
+ * @returns {Promise<string>} - Returns the path of the random image
+ * @description This function gets a random image from the room
+ */
+export async function getRandomImage(roomID: string) {
+    const room = await getRoomByID(roomID);
+
+    if (!room || !room._id) return;
+    const roomImagesPath = path.resolve(`${__dirname}/../../frontend/public/roomImages/${room.roomName}`);
+    const files = fs.readdirSync(roomImagesPath);
+    const randomImage = files[Math.floor(Math.random() * files.length)];
+
+    return `/roomImages/${room.roomName}/${randomImage}`;
+}
+
+/**
+ * @name getRoomByID
+ * @param  {string} roomID - ID of the room
+ * @returns {Promise<iRoom[]>} - Returns the board
+ * @description This function returns the board
+ */
+export async function getRoomByID(roomID: string) {
+    return await room.findOne({ _id: new Types.ObjectId(roomID) });
 }
 
 /**

@@ -2,7 +2,7 @@
 import { Request, Response, Router } from 'express';
 
 //Local Dependencies Import
-import { createRoom, getRooms, deleteRoom, updateRoomName } from '../room';
+import { createRoom, getRooms, deleteRoom, updateRoomName, getRandomImage } from '../room';
 import iRoom from '../interfaces/iRoom';
 
 //Variable Declarations
@@ -14,6 +14,16 @@ const router = Router();
  */
 router.get('/', async (req: Request, res: Response) => {
     res.json(await getRooms()).status(200);
+});
+
+/**
+ * @name get/room
+ * @param {string} roomID - ID of the room
+ * @description This route returns a random image of the room
+ */
+router.get('/image/:id', async (req: Request, res: Response) => {
+    const image = await getRandomImage(req.params.id);
+    res.json({ image: image }).status(200);
 });
 
 /**

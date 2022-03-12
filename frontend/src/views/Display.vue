@@ -1,5 +1,5 @@
 <template>
-	<div class="main-content w-full py-4 flex justify-center">
+	<div class="main-content w-full py-4 flex justify-center bg-slate-300" ref="main">
 		<div v-if="rooms" class="w-5/6 flex flex-col items-center">
 			<h1 class="text-6xl font-bold text-white bg-slate-500/[.7] p-5 rounded">
 				{{ this.rooms[this.activeRoomIndex].roomName }}
@@ -19,16 +19,22 @@
 		data: function () {
 			return {
 				rooms: null,
-				activeRoomIndex: {}
+				activeRoomIndex: {},
+				backgroundImage: null
 			};
 		},
-
 		methods: {
 			async getRooms() {
 				const request = await fetch('/api/rooms');
 				const response = await request.json();
 				this.rooms = response;
 				this.activeRoomIndex = this.rooms.length - 1;
+				this.getBackgroundImage();
+			},
+			async getBackgroundImage() {
+				const request = await fetch(`/api/rooms/image/${this.rooms[this.activeRoomIndex]._id}`);
+				const response = await request.json();
+				this.$refs.main.style.backgroundImage = `url("${response.image}")`;
 			},
 			startInterval() {
 				setInterval(() => {
@@ -47,7 +53,6 @@
 <style scoped>
 	.main-content {
 		min-height: calc(100vh - 64px);
-		background-image: url('https://gothenburg.escapegameover.se/assets/img/rooms/walking-death/carousel/carousel_1.jpg');
 	}
 	@media all and (display-mode: fullscreen) {
 		.main-content {
