@@ -41,6 +41,7 @@
 					this.activeRoomIndex =
 						this.activeRoomIndex === this.rooms.length - 1 ? 0 : this.activeRoomIndex + 1;
 					this.$refs.activeDisplay.getScores(this.rooms[this.activeRoomIndex]._id);
+					this.getBackgroundImage();
 				}, 15000);
 			}
 		},
