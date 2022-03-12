@@ -139,6 +139,55 @@
 			async createScore() {
 				//Convert YYYY-MM-DD to date object
 				const date = new Date(this.datePicker);
+
+				//Date check
+				if (!date) {
+					this.errorMessage = 'Datumet är inte giltigt';
+					return;
+				}
+
+				//Teamname min check
+				if (this.teamName.length < 0) {
+					this.errorMessage = 'Lagnamnet får ej vara tomt!';
+					return;
+				}
+
+				//Teamname min check
+				if (this.teamName.length > 42) {
+					this.errorMessage = 'Lagnamnet får ej vara längre än 42 karaktärer!';
+					return;
+				}
+
+				//Clues min check
+				if (this.clues < 0) {
+					this.errorMessage = 'Antalet ledtrådar får ej vara mindre än 0!';
+					return;
+				}
+
+				//Minutes min check
+				if (this.minutes <= 0) {
+					this.errorMessage = 'Antalet minuter får ej vara mindre än 1!';
+					return;
+				}
+
+				//Minutes max check
+				if (this.minutes > 60) {
+					this.errorMessage = 'Antalet minuter får ej vara större än 60!';
+					return;
+				}
+
+				//Seconds min check
+				if (this.seconds < 0) {
+					this.errorMessage = 'Antalet sekunder får ej vara mindre än 0!';
+					return;
+				}
+
+				//Seconds max check
+				if (this.seconds > 60) {
+					this.errorMessage = 'Antalet sekunder får ej vara större än 60!';
+					return;
+				}
+
 				const response = await fetch('/api/scores/create', {
 					method: 'POST',
 					headers: {
