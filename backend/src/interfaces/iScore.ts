@@ -2,12 +2,12 @@
 import { Types } from 'mongoose';
 
 //Creates a Interface and exports it
-export default interface iBoard {
+export default interface iScore {
     _id: Types.ObjectId;
     teamName: string;
     room: string;
-    minutes: number;
-    seconds: number;
+    time: number;
+    clues: number;
     date: Date;
     createdAt: Date;
 }

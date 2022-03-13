@@ -3,6 +3,7 @@ import { Types } from 'mongoose';
 
 //Local Dependencies Import
 import Score from './models/Score';
+import iScore from './interfaces/iScore';
 
 /**
  * @name createScore
@@ -62,7 +63,63 @@ export async function getScores() {
  * @description This function returns all the scores with the given id
  */
 export async function getScoresWithID(roomID: string) {
-    return await Score.find({ room: new Types.ObjectId(roomID) }).sort({ createdAt: -1 });
+    const scores = await Score.find({ room: new Types.ObjectId(roomID) }).sort({ createdAt: -1 });
+    const scoresFromLast30Days = scores.filter((score) => {
+        const date = new Date(score.date);
+        const now = new Date();
+        const diff = now.getTime() - date.getTime();
+        return diff < 30 * 24 * 60 * 60 * 1000;
+    });
+
+    return {
+        topLast30Days: cutArray(sortScores(scoresFromLast30Days), 10),
+        topAllTime: cutArray(sortScores(scores), 10),
+    };
+}
+
+/**
+ * @name sortScores
+ * @param scores - Array of scores to sort
+ * @returns Array<iScore> - Array of sorted scores
+ * @description This function sorts the scores by time and clues
+ */
+function sortScores(scores: Array<iScore>) {
+    //sort by time
+    const sortedScores = scores.sort((a, b) => {
+        if (addCluesToTime(a.time, a.clues) < addCluesToTime(b.time, b.clues)) {
+            return -1;
+        }
+        if (addCluesToTime(a.time, a.clues) > addCluesToTime(b.time, b.clues)) {
+            return 1;
+        }
+        return 0;
+    });
+    return sortedScores;
+}
+
+/**
+ * @name cutArray
+ * @param scores - Array of scores to sort
+ * @param numberInArray - Limit array to this number
+ * @returns Array<iScore> - Array of sorted scores
+ * @description This cuts array at specfic number
+ */
+function cutArray(scores: Array<iScore>, numberInArray: number) {
+    if (scores.length > numberInArray) {
+        return scores.slice(0, numberInArray);
+    }
+    return scores;
+}
+
+/**
+ * @name addCluesToTime
+ * @param time - The Time to add clues to
+ * @param clues - The number of clues to add
+ * @returns {number} - The new time
+ * @description This function adds clues to a time
+ */
+function addCluesToTime(time: number, clues: number) {
+    return time + clues * 5000;
 }
 
 /**

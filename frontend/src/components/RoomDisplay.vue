@@ -10,9 +10,9 @@
 					<th class="text-3xl p-2 m-4">Ledtrådar</th>
 				</tr>
 				<tr
-					v-for="(score, index) in scores"
+					v-for="(score, index) in topLast30Days"
 					:key="score._id"
-					:class="{ 'border-b': index < scores.length - 1 }"
+					:class="{ 'border-b': index < topLast30Days.length - 1 }"
 				>
 					<td class="text-2xl p-2 m-4">{{ index + 1 }}.</td>
 
@@ -33,9 +33,9 @@
 					<th class="text-3xl p-2 m-4">Ledtrådar</th>
 				</tr>
 				<tr
-					v-for="(score, index) in scores"
+					v-for="(score, index) in topAllTime"
 					:key="score._id"
-					:class="{ 'border-b': index < scores.length - 1 }"
+					:class="{ 'border-b': index < topAllTime.length - 1 }"
 				>
 					<td class="text-2xl p-2 m-4">{{ index + 1 }}.</td>
 
@@ -54,7 +54,8 @@
 		name: 'RoomDisplay',
 		data: function () {
 			return {
-				scores: {}
+				topAllTime: {},
+				topLast30Days: {}
 			};
 		},
 		props: {
@@ -67,8 +68,10 @@
 			async getScores(roomID) {
 				const request = await fetch(`/api/scores/${roomID}`);
 				const response = await request.json();
-				this.scores = response;
-				this.scores.map((scores) => (scores.time = this.time(scores.time)));
+				this.topAllTime = response.topAllTime;
+				this.topAllTime.map((scores) => (scores.time = this.time(scores.time)));
+				this.topLast30Days = response.topLast30Days;
+				this.topLast30Days.map((scores) => (scores.time = this.time(scores.time)));
 			},
 			time(seconds) {
 				const minutes = Math.floor(seconds / 60);
