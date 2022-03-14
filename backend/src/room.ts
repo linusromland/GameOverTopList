@@ -14,7 +14,7 @@ import room from './models/Room';
  */
 export async function createRoom(roomName: string) {
     //Create roomImages folder for the room
-    const roomImagesPath = path.resolve(`${__dirname}/../../frontend/public/roomImages/${roomName}`);
+    const roomImagesPath = path.resolve(`${__dirname}/roomImages/${roomName}`);
 
     if (!fs.existsSync(roomImagesPath)) {
         fs.mkdirSync(roomImagesPath);
@@ -42,7 +42,7 @@ export async function getRandomImage(roomID: string) {
     const room = await getRoomByID(roomID);
 
     if (!room || !room._id) return;
-    const roomImagesPath = path.resolve(`${__dirname}/../../frontend/public/roomImages/${room.roomName}`);
+    const roomImagesPath = path.resolve(`${__dirname}/roomImages/${room.roomName}`);
     const files = fs.readdirSync(roomImagesPath);
     const randomImage = files[Math.floor(Math.random() * files.length)];
 
