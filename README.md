@@ -2,7 +2,7 @@
 <p align="center">GameOverTopList is a <b>Top List</b>  built and using <b>TypeScript & Vue.js</b>.
 
 <p align="center"><a href="https://github.com/linusromland/gameovertoplist/releases" target="_blank"><img src="https://img.shields.io/badge/version-v0.0.1-blue?style=for-the-badge&logo=none" alt="cli version" /></a>&nbsp;<a href="https://nodejs.org/en/" target="_blank"><img src="https://img.shields.io/badge/Node.JS-14.17+-0?style=for-the-badge&logo=nodedotjs" alt="go version" /></a>&nbsp;
-<a href="https://github.com/linusromland/gameovertoplist/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none" alt="license" /></a> <a ><img src="https://img.shields.io/badge/Project%20Status-Work%20in%20Progress-yellow?style=for-the-badge&logo=none" alt="Repo Status" /></a>
+<a href="https://github.com/linusromland/gameovertoplist/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none" alt="license" /></a> <a ><img src="https://img.shields.io/badge/Project%20Status-Inactive-red?style=for-the-badge&logo=none" alt="Repo Status" /></a>
 </p>
 
 ## ⚡️ Setup
