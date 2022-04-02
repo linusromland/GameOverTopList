@@ -69,7 +69,7 @@
 		<div>
 			<CreateScoreModal @refresh="getScores" />
 		</div>
-		<div class="lg:w-2/6 w-10/12">
+		<div class="lg:w-4/6 w-10/12">
 			<div class="w-full flex justify-around">
 				<input
 					type="text"
