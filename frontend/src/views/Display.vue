@@ -1,5 +1,5 @@
 <template>
-	<div class="main-content w-full py-4 flex justify-center bg-slate-300" ref="main">
+	<div class="main-content w-full py-4 flex justify-center bg-slate-600" ref="main">
 		<div v-if="rooms" class="w-5/6 flex flex-col items-center mt-8">
 			<h1 class="text-6xl font-bold text-white bg-slate-500/[.7] p-5 rounded mb-6">
 				{{ this.rooms[this.activeRoomIndex].roomName }}
