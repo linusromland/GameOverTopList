@@ -21,7 +21,7 @@
 			class="w-5/6 p-2 m-5 rounded-md bg-gray-200 text-black"
 			placeholder="Rumsnamn"
 			autocomplete="off"
-			maxlength="24"
+			maxlength="50"
 			v-model="roomName"
 		/>
 	</Modal>
