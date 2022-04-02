@@ -1,6 +1,6 @@
 <template>
 	<div class="w-screen flex">
-		<div class="w-1/2 bg-slate-500/[.7] p-6 rounded text-white m-4">
+		<div class="w-1/2 bg-slate-500/[.7] p-6 rounded text-white m-8 ml-16">
 			<h2 class="text-5xl font-bold text-center mb-4">Top senaste 30 dagarna</h2>
 			<table class="rounded w-full text-center table-auto bg-slate-600">
 				<tr class="border-b">
@@ -23,7 +23,7 @@
 				</tr>
 			</table>
 		</div>
-		<div class="w-1/2 bg-slate-500/[.7] p-6 rounded text-white m-4">
+		<div class="w-1/2 bg-slate-500/[.7] p-6 rounded text-white m-8 mr-16">
 			<h2 class="text-5xl font-bold text-center mb-4">Top all time</h2>
 			<table class="rounded w-full text-center table-auto bg-slate-600">
 				<tr class="border-b">
