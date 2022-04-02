@@ -1,7 +1,7 @@
 <template>
 	<div class="bg-slate-400 px-6 navbar">
 		<div class="py-4 flex justify-center lg:justify-between">
-			<router-link to="/display" class="hidden lg:block title">
+			<router-link to="/" class="hidden lg:block title">
 				<span class="pl-2 text-black font-semibold text-xl">Game Over Escape Rooms Ullevi</span></router-link
 			>
 			<div class="relative flex items-center lg:ml-auto">
