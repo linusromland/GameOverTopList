@@ -72,8 +72,8 @@ export async function getScoresWithID(roomID: string) {
     });
 
     return {
-        topLast30Days: cutArray(sortScores(scoresFromLast30Days), 10),
-        topAllTime: cutArray(sortScores(scores), 10),
+        topLast30Days: cutArray(sortScores(scoresFromLast30Days), 5),
+        topAllTime: cutArray(sortScores(scores), 5),
     };
 }
 
