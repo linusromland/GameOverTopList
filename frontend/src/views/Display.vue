@@ -54,6 +54,7 @@
 <style scoped>
 	.main-content {
 		min-height: calc(100vh - 64px);
+		background-size: cover;
 	}
 	@media all and (display-mode: fullscreen) {
 		.main-content {
