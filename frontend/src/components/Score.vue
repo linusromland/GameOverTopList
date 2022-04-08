@@ -14,8 +14,17 @@
 				Rum: <span class="font-bold">{{ score.roomName }}</span>
 			</p>
 		</div>
-		<div class="flex items-center">
+		<div class="flex flex-col">
 			<DeleteScoreModal :score="score" @refresh="$emit('refresh')" />
+			<p class="text-sm">
+				Spelad: <span class="font-bold">{{ convertDatetoDay(score.date) }}</span>
+			</p>
+			<p class="text-sm">
+				Skapad:
+				<span class="font-bold"
+					>{{ convertDatetoDay(score.createdAt) }} {{ convertDatetoTime(score.createdAt) }}</span
+				>
+			</p>
 		</div>
 	</div>
 </template>
@@ -39,6 +48,16 @@
 				const minutes = Math.floor(seconds / 60);
 				const secondsLeft = seconds % 60;
 				return `${minutes}min ${secondsLeft}s`;
+			}
+		},
+		methods: {
+			convertDatetoDay(date) {
+				const dateObj = new Date(date);
+				return dateObj.toLocaleDateString('sv-SE');
+			},
+			convertDatetoTime(date) {
+				const dateObj = new Date(date);
+				return dateObj.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' });
 			}
 		}
 	};
