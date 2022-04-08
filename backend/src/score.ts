@@ -72,7 +72,7 @@ export async function getScoresWithID(roomID: string) {
     });
 
     return {
-        topLast30Days: cutArray(sortScores(scoresFromLast30Days), 5),
+        topLast30Days: cutArray(sortScores(scoresFromLast30Days, 0), 5),
         topAllTime: cutArray(sortScores(scores), 5),
     };
 }
@@ -80,16 +80,17 @@ export async function getScoresWithID(roomID: string) {
 /**
  * @name sortScores
  * @param scores - Array of scores to sort
+ * @param clueValue - The value in time of one clue
  * @returns Array<iScore> - Array of sorted scores
  * @description This function sorts the scores by time and clues
  */
-function sortScores(scores: Array<iScore>) {
+function sortScores(scores: Array<iScore>, clueValue = 5000) {
     //sort by time
     const sortedScores = scores.sort((a, b) => {
-        if (addCluesToTime(a.time, a.clues) < addCluesToTime(b.time, b.clues)) {
+        if (addCluesToTime(a.time, a.clues, clueValue) < addCluesToTime(b.time, b.clues, clueValue)) {
             return -1;
         }
-        if (addCluesToTime(a.time, a.clues) > addCluesToTime(b.time, b.clues)) {
+        if (addCluesToTime(a.time, a.clues, clueValue) > addCluesToTime(b.time, b.clues, clueValue)) {
             return 1;
         }
         return 0;
@@ -115,11 +116,12 @@ function cutArray(scores: Array<iScore>, numberInArray: number) {
  * @name addCluesToTime
  * @param time - The Time to add clues to
  * @param clues - The number of clues to add
+ * @param clueValue - The value in time of one clue
  * @returns {number} - The new time
  * @description This function adds clues to a time
  */
-function addCluesToTime(time: number, clues: number) {
-    return time + clues * 5000;
+function addCluesToTime(time: number, clues: number, clueValue: number) {
+    return time + clues * clueValue;
 }
 
 /**
