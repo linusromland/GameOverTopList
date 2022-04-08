@@ -72,8 +72,7 @@
 			},
 			time(seconds) {
 				const minutes = Math.floor(seconds / 60);
-				const secondsLeft = seconds % 60;
-				return `${minutes}min ${secondsLeft}s`;
+				return `${minutes}min`;
 			}
 		},
 		mounted() {

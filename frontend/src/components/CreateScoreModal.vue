@@ -73,7 +73,7 @@
 				@input="checkInput"
 			/>
 		</div>
-		<div class="w-5/6 flex flex-col m-2">
+		<div class="w-5/6 hidden m-2">
 			<label for="secondsSelector">Sekunder: <span class="text-red-600">*</span></label>
 			<input
 				id="secondsSelector"
