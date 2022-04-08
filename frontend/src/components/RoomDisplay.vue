@@ -7,7 +7,6 @@
 					<th />
 					<th class="text-4xl p-2 m-4">Lagnamn</th>
 					<th class="text-4xl p-2 m-4">Tid</th>
-					<th class="text-4xl p-2 m-4">Ledtrådar</th>
 				</tr>
 				<tr
 					v-for="(score, index) in topLast30Days"
@@ -18,8 +17,6 @@
 
 					<td class="text-3xl p-2 m-4">{{ score.teamName }}</td>
 					<td class="text-3xl p-2 m-4">{{ score.time }}</td>
-
-					<td class="text-3xl p-2 m-4">{{ score.clues }}</td>
 				</tr>
 			</table>
 		</div>
